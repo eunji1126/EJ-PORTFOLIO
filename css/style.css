@@ -1,0 +1,617 @@
+html {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+  color: #191919;
+  font-family: "Montserrat", sans-serif;
+  /*cursor: url("../images/pavicon.png"), auto;*/
+}
+
+@font-face {
+  font-family: "GowunBatang-Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/	GowunBatang-Bold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GongGothicMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+header {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
+header #title {
+  float: left;
+  font-size: 30px;
+  margin: 20px 30px;
+  font-weight: 600;
+}
+header #title a {
+  text-decoration: none;
+  color: #191919;
+}
+header #gnb {
+  float: right;
+  width: 30%;
+  margin: 28px 40px 0 40px;
+}
+header #gnb .menu {
+  display: flex;
+  font-weight: 600;
+  color: #000;
+  justify-content: space-between;
+  position: relative;
+}
+header #gnb .btn {
+  cursor: pointer;
+}
+header #gnb .btn::after {
+  content: "";
+  display: block;
+  position: absolute;
+  background: rgba(105, 207, 255, 0.2);
+  bottom: 0;
+  z-index: 90;
+  width: 0;
+  height: 18px;
+  transition: all 0.2s ease-in-out;
+}
+header #gnb .btn:hover::after,
+header #gnb .btn.active::after {
+  width: 4em;
+}
+header #gnb .btn:nth-child(1):hover::after,
+header #gnb .btn.active:nth-child(1)::after {
+  width: 3.5em;
+}
+header #gnb .btn:nth-child(4):hover::after,
+header #gnb .btn.active:nth-child(4)::after {
+  width: 5em;
+}
+
+#wrap {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+#wrap .area {
+  width: 100%;
+  height: 100%;
+}
+#wrap .inner {
+  width: 92%;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  padding-top: 50px;
+  box-sizing: border-box;
+}
+#wrap .pager {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  z-index: 100;
+  transform: translateY(-50%);
+}
+#wrap .pager span {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border: 1px solid #000;
+  margin: 10px 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+#wrap .pager span.active {
+  background: #000;
+}
+#wrap .scrollbar {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  bottom: 5px;
+  width: 5px;
+  z-index: 101;
+  background: #999797;
+  border: 1px inset #ccc;
+  border-radius: 3.5px;
+  transition: all 0.3s;
+}
+#wrap .scrollbar:hover {
+  opacity: 1 !important;
+}
+#wrap .scrollbar div {
+  height: 25%;
+  width: 5px;
+  background: #f00;
+  border-radius: 2.5px;
+}
+#wrap #main {
+  background: #fff;
+}
+#wrap #main .jb-box {
+  overflow: hidden;
+  margin: 0px auto;
+  position: relative;
+}
+#wrap #main .jb-box video {
+  width: 100%;
+  height: 100vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+#wrap #main .jb-box::before {
+  content: "";
+  background: rgba(255, 255, 255, 0.2);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+#wrap #main :root {
+  --delay: 0;
+  --duration: 1000ms;
+  --iterations: 1;
+}
+#wrap #main .reveal-text,
+#wrap #main .reveal-text::after {
+  -webkit-animation-delay: var(--animation-delay, 2s);
+          animation-delay: var(--animation-delay, 2s);
+  -webkit-animation-iteration-count: var(--iterations, 1);
+          animation-iteration-count: var(--iterations, 1);
+  -webkit-animation-duration: var(--duration, 1000ms);
+          animation-duration: var(--duration, 1000ms);
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+          animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+#wrap #main .reveal-text {
+  --animation-delay: var(--delay, 0);
+  --animation-duration: var(--duration, 1000ms);
+  --animation-iterations: var(--iterations, 1);
+  -webkit-animation-name: clip-text;
+          animation-name: clip-text;
+  color: #191919;
+  white-space: nowrap;
+  cursor: default;
+}
+#wrap #main .reveal-text::after {
+  content: "";
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #b3dae6;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  pointer-events: none;
+  -webkit-animation-name: text-revealer;
+          animation-name: text-revealer;
+}
+@-webkit-keyframes clip-text {
+  from {
+    -webkit-clip-path: inset(0 100% 0 0);
+            clip-path: inset(0 100% 0 0);
+  }
+  to {
+    -webkit-clip-path: inset(0 0 0 0);
+            clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes clip-text {
+  from {
+    -webkit-clip-path: inset(0 100% 0 0);
+            clip-path: inset(0 100% 0 0);
+  }
+  to {
+    -webkit-clip-path: inset(0 0 0 0);
+            clip-path: inset(0 0 0 0);
+  }
+}
+@-webkit-keyframes text-revealer {
+  0%, 50% {
+    transform-origin: 0 50%;
+  }
+  60%, 100% {
+    transform-origin: 100% 50%;
+  }
+  60% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0);
+  }
+}
+@keyframes text-revealer {
+  0%, 50% {
+    transform-origin: 0 50%;
+  }
+  60%, 100% {
+    transform-origin: 100% 50%;
+  }
+  60% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0);
+  }
+}
+#wrap #main h3 {
+  position: absolute;
+  font-weight: bold;
+  z-index: 100;
+  top: 40vh;
+  left: calc(50% - 400px);
+  font-size: 40px;
+  text-align: center;
+}
+#wrap #main p {
+  position: absolute;
+  z-index: 100;
+  top: 50vh;
+  left: calc(50% - 150px);
+  font-size: 30px;
+  text-align: center;
+  line-height: 1.3;
+  font-family: "GowunBatang-Bold";
+}
+#wrap #about {
+  background: #6B7AA1;
+  transition: all 0.3s;
+}
+#wrap #about .inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#wrap #about .inner .profile img {
+  width: 25vw;
+  border-radius: 25px;
+  top: 0;
+  box-shadow: 5px 5px 10px 5px rgba(82, 82, 82, 0.5);
+  transition: all 0.5s;
+}
+#wrap #about .inner .profile img:hover {
+  transform: scale(1.03, 1.03);
+}
+#wrap #about .inner h4 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 0 0 80px;
+}
+#wrap #about .inner p {
+  font-weight: 500;
+  font-size: 16px;
+}
+#wrap #about .inner .education {
+  margin-bottom: 80px;
+  margin-top: -30px;
+  display: flex;
+}
+#wrap #about .inner .education li {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+#wrap #about .inner .education p {
+  font-family: "GongGothicMedium";
+  line-height: 1.6;
+}
+#wrap #about .inner .skill {
+  display: flex;
+}
+#wrap #about .inner .skill h4 {
+  margin-top: 25px;
+}
+#wrap #about .inner .skill li {
+  display: inline-block;
+}
+#wrap #about .inner .skill li img {
+  width: 50px;
+  margin: 0 0 20px 30px;
+}
+#wrap #about .inner .skill li p {
+  font-size: 16px;
+}
+#wrap #about .inner .skill li:nth-child(3) img,
+#wrap #about .inner .skill li:nth-child(4) img,
+#wrap #about .inner .skill li:nth-child(5) img {
+  height: 65px;
+}
+#wrap #about .inner .skill li:last-child p {
+  top: auto;
+  margin: 30px 0 0 20px;
+  font-weight: 600;
+}
+#wrap #about .inner .skill .dashboard {
+  position: relative;
+  display: flex;
+}
+#wrap #about .inner .skill svg {
+  width: 80px;
+  height: 80px;
+  margin: 1em;
+}
+#wrap #about .inner .skill .bg {
+  fill: none;
+  stroke-width: 9.3px;
+  stroke: #1A2C34;
+}
+#wrap #about .inner .skill [class^=meter-] {
+  fill: none;
+  stroke-width: 10px;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  stroke-dasharray: 360;
+  stroke-dashoffset: 360;
+}
+#wrap #about .inner .skill .meter-1 {
+  stroke: #3E64FF;
+}
+#wrap #about .inner .skill .meter-2 {
+  stroke: #1089FF;
+}
+#wrap #about .inner .skill .meter-3 {
+  stroke: #5EDFFF;
+}
+#wrap #about .inner .skill .meter-4 {
+  stroke: #64C4ED;
+}
+#wrap #about .inner .skill .meter-5 {
+  stroke: #3E64FF;
+}
+@-webkit-keyframes progress-1 {
+  from {
+    stroke-dashoffset: 360;
+  }
+  to {
+    stroke-dashoffset: 195;
+  }
+}
+@keyframes progress-1 {
+  from {
+    stroke-dashoffset: 360;
+  }
+  to {
+    stroke-dashoffset: 195;
+  }
+}
+@-webkit-keyframes progress-2 {
+  from {
+    stroke-dashoffset: 360;
+  }
+  to {
+    stroke-dashoffset: 210;
+  }
+}
+@keyframes progress-2 {
+  from {
+    stroke-dashoffset: 360;
+  }
+  to {
+    stroke-dashoffset: 210;
+  }
+}
+@-webkit-keyframes progress-3 {
+  from {
+    stroke-dashoffset: 360;
+  }
+  to {
+    stroke-dashoffset: 160;
+  }
+}
+@keyframes progress-3 {
+  from {
+    stroke-dashoffset: 360;
+  }
+  to {
+    stroke-dashoffset: 160;
+  }
+}
+@-webkit-keyframes progress-4 {
+  from {
+    stroke-dashoffset: 360;
+  }
+  to {
+    stroke-dashoffset: 170;
+  }
+}
+@keyframes progress-4 {
+  from {
+    stroke-dashoffset: 360;
+  }
+  to {
+    stroke-dashoffset: 170;
+  }
+}
+@-webkit-keyframes progress-5 {
+  from {
+    stroke-dashoffset: 360;
+  }
+  to {
+    stroke-dashoffset: 180;
+  }
+}
+@keyframes progress-5 {
+  from {
+    stroke-dashoffset: 360;
+  }
+  to {
+    stroke-dashoffset: 180;
+  }
+}
+#wrap #about .inner .skill p {
+  position: absolute;
+  left: calc(50% - 17px);
+  top: calc(50% - 8px);
+}
+#wrap #about.swiper-slide-active {
+  background: #f5fcff;
+}
+#wrap #about.swiper-slide-active .meter-1 {
+  -webkit-animation: progress-1 1.25s ease-out 0.3s forwards;
+          animation: progress-1 1.25s ease-out 0.3s forwards;
+}
+#wrap #about.swiper-slide-active .meter-2 {
+  -webkit-animation: progress-2 1s ease-out 0.3s forwards;
+          animation: progress-2 1s ease-out 0.3s forwards;
+}
+#wrap #about.swiper-slide-active .meter-3 {
+  -webkit-animation: progress-3 0.75s ease-out 0.3s forwards;
+          animation: progress-3 0.75s ease-out 0.3s forwards;
+}
+#wrap #about.swiper-slide-active .meter-4 {
+  -webkit-animation: progress-4 1.25s ease-out 0.3s forwards;
+          animation: progress-4 1.25s ease-out 0.3s forwards;
+}
+#wrap #about.swiper-slide-active .meter-5 {
+  -webkit-animation: progress-5 0.75s ease-out 0.3s forwards;
+          animation: progress-5 0.75s ease-out 0.3s forwards;
+}
+#wrap #works {
+  background: #6B7AA1;
+  transition: all 0.3s;
+  font-family: "GongGothicMedium";
+}
+#wrap #works #work_area {
+  padding: 70px 50px;
+  overflow: hidden;
+  font-size: 20px;
+  text-align: center;
+}
+#wrap #works #work_area .list {
+  display: flex;
+  flex-wrap: wrap;
+}
+#wrap #works #work_area .list .item {
+  flex-shrink: 0;
+}
+#wrap #works #work_area .list .item img {
+  width: 100%;
+  transition: all 0.3s;
+}
+#wrap #works #work_area .list .item h4 {
+  line-height: 1.3;
+}
+#wrap #works #work_area .list .item span {
+  font-size: 16px;
+}
+#wrap #works #work_area .list .item p {
+  margin: 10px 0;
+}
+#wrap #works #work_area .list .item a {
+  text-decoration: none;
+  color: #191919;
+  font-size: 18px;
+}
+#wrap #works #work_area .list .item .hoverline {
+  position: relative;
+}
+#wrap #works #work_area .list .item .hoverline::after {
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  content: "";
+  display: block;
+  background: rgba(35, 185, 255, 0.4);
+  width: 0;
+  height: 8px;
+  transition: all 0.2s ease-in-out;
+}
+#wrap #works #work_area .list .item .hoverline:hover::after {
+  width: 100%;
+}
+#wrap #works #work_area .list .item .window a {
+  margin: 0 7px;
+}
+#wrap #works #work_area .list .item:hover a {
+  color: #2D46B9;
+}
+#wrap #works #work_area .list .item:hover img {
+  transform: scale(1.07, 1.07);
+}
+#wrap #works #work_area .list .item:hover .hoverline::after {
+  width: 100%;
+}
+#wrap #works.swiper-slide-active {
+  background: #eef8ff;
+}
+#wrap #contact {
+  background: #6B7AA1;
+  position: relative;
+  transition: all 0.3s;
+}
+#wrap #contact .inner .end {
+  position: absolute;
+  left: 20%;
+}
+#wrap #contact .inner .end .end_text li {
+  position: relative;
+  color: #dfdfdf;
+  text-transform: uppercase;
+  display: inline-block;
+  font-size: 60px;
+  font-weight: bold;
+  text-shadow: -2px -2px 0 #193498, 2px -2px 0 #193498, -2px 2px 0 #193498, 2px 2px 0 #193498;
+}
+#wrap #contact .inner .end .end_text li:after {
+  content: attr(data-head);
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0.8;
+  z-index: 2;
+  overflow: hidden;
+  color: #16a6ff;
+  transform: translate(0.4vw, 0.3vh);
+  mix-blend-mode: darken;
+  text-align: center;
+  text-shadow: 1px 0px 0px #193498, 0px 1px 0px #69DADB, 2px 1px 0px #193498, 1px 2px 0px #69DADB, 3px 2px 0px #193498, 2px 3px 0px #69DADB, 4px 3px 0px #193498, 3px 4px 0px #69DADB, 5px 4px 0px #193498, 4px 5px 0px #69DADB, 6px 5px 0px #193498, 5px 6px 0px #69DADB, 7px 6px 0px #193498;
+}
+#wrap #contact .inner .kakaotalk {
+  position: absolute;
+  top: 31vh;
+  left: 55%;
+}
+#wrap #contact .inner .kakaotalk img {
+  width: 18vw;
+  margin-bottom: 30px;
+}
+#wrap #contact .inner .kakaotalk p {
+  font-size: 20px;
+  font-family: "GongGothicMedium";
+  text-align: center;
+}
+#wrap #contact .inner .copy {
+  position: absolute;
+  left: calc(50% - 225px);
+  bottom: 40px;
+}
+#wrap #contact .inner .copy p {
+  text-align: center;
+  color: #555;
+  font-family: "GongGothicMedium";
+}
+#wrap #contact .inner .copy p span {
+  font-family: "Montserrat", sans-serif !important;
+  font-weight: bold;
+}
+#wrap #contact.swiper-slide-active {
+  background: #eef8ff;
+}/*# sourceMappingURL=style.css.map */
